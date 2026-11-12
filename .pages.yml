@@ -1,0 +1,23 @@
+media:
+  input: public/images
+  output: /images
+content:
+  - name: blog
+    label: Bài viết
+    type: collection
+    path: src/content/blog
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, pubDate]
+      primary: title
+      sort: [pubDate]
+      default:
+        sort: pubDate
+        order: desc
+    fields:
+      - { name: title, label: Tiêu đề, type: string, required: true }
+      - { name: description, label: Mô tả ngắn, type: string, required: true }
+      - { name: pubDate, label: Ngày đăng, type: date, required: true }
+      - { name: updatedDate, label: Ngày cập nhật, type: date }
+      - { name: heroImage, label: Ảnh đầu bài, type: image }
+      - { name: body, label: Nội dung, type: rich-text }
