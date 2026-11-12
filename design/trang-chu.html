@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decor Nhà Đẹp - Cảm hứng sống đẹp mỗi ngày</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<script>
+  // Chọn giao diện TRƯỚC khi vẽ trang để không bị chớp màu.
+  // Ưu tiên lựa chọn người đọc đã bấm; nếu chưa có thì theo giờ địa phương của máy họ (6h-18h sáng).
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var h = new Date().getHours();
+    var auto = (h >= 6 && h < 18) ? 'light' : 'dark';
+    document.documentElement.dataset.theme = saved || auto;
+  })();
+</script>
+<style>
+  :root {
+    --bg: #FBFAF7; --surface: #FFFFFF; --soft: #F1EEE7;
+    --text: #1F2328; --muted: #5C6470; --line: #E6E1D8;
+    --accent: #C8693B; --accent-soft: #F6E3D7; --green: #4F7A5A;
+    --radius: 14px; --maxw: 1180px;
+  }
+  [data-theme="dark"] {
+    --bg: #14161A; --surface: #1C1F24; --soft: #23272D;
+    --text: #ECE9E3; --muted: #A3A9B3; --line: #2E333A;
+    --accent: #E38A5C; --accent-soft: #3A2A21; --green: #7FB08B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    transition: background .3s, color .3s;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  .serif { font-family: "Lora", Georgia, serif; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; gap: 28px; height: 68px; }
+  .logo { font-weight: 800; font-size: 20px; letter-spacing: -.3px; }
+  .logo span { color: var(--accent); }
+  .menu { display: flex; gap: 22px; margin-left: auto; font-weight: 500; font-size: 15px; color: var(--muted); }
+  .menu a:hover { color: var(--text); }
+  .actions { display: flex; gap: 10px; }
+  .icon-btn { width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--text); cursor: pointer; display: grid; place-items: center; font-size: 18px; }
+  .icon-btn:hover { border-color: var(--accent); }
+  .burger { display: none; }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; padding: 64px 0 56px; }
+  .tag { display: inline-block; padding: 4px 12px; border-radius: 99px; background: var(--accent-soft);
+    color: var(--accent); font-size: 13px; font-weight: 600; }
+  .hero h1 { font-size: clamp(34px, 4.6vw, 54px); line-height: 1.15; letter-spacing: -1px; margin: 18px 0; font-weight: 800; }
+  .hero p { color: var(--muted); font-size: 19px; max-width: 520px; }
+  .meta { display: flex; gap: 14px; margin-top: 22px; font-size: 14px; color: var(--muted); }
+  .btn { display: inline-block; margin-top: 28px; padding: 13px 24px; border-radius: 10px; background: var(--accent);
+    color: #fff; font-weight: 600; }
+  .hero-img { aspect-ratio: 4/3.4; border-radius: 22px; overflow: hidden; background: var(--soft); }
+
+  /* Danh mục */
+  .cats { display: flex; gap: 10px; flex-wrap: wrap; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+  .chip { padding: 9px 18px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface);
+    font-size: 15px; font-weight: 500; cursor: pointer; color: var(--text); font-family: inherit; }
+  .chip.on, .chip:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+  section { padding: 56px 0; }
+  .head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 28px; }
+  .head h2 { font-size: 30px; letter-spacing: -.5px; font-weight: 700; }
+  .head a { color: var(--accent); font-weight: 600; font-size: 15px; }
+
+  /* Lưới bài viết */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .card .thumb { aspect-ratio: 16/11; border-radius: var(--radius); overflow: hidden; background: var(--soft); }
+  .card img { transition: transform .5s; }
+  .card:hover img { transform: scale(1.04); }
+  .card .cat { margin-top: 16px; font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .6px; }
+  .card h3 { font-size: 21px; line-height: 1.4; margin: 6px 0 8px; font-weight: 700; }
+  .card:hover h3 { color: var(--accent); }
+  .card p { color: var(--muted); font-size: 15.5px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .card small { display: block; margin-top: 10px; color: var(--muted); font-size: 13.5px; }
+
+  /* Bài nổi bật dạng danh sách + phổ biến */
+  .split { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+  .row { display: grid; grid-template-columns: 220px 1fr; gap: 22px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .row .thumb { aspect-ratio: 4/3; }
+  .row h3 { margin-top: 2px; }
+  aside .box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  aside h4 { font-size: 18px; margin-bottom: 14px; }
+  .rank { display: flex; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line); }
+  .rank b { font-size: 26px; color: var(--accent); line-height: 1; min-width: 28px; }
+  .rank span { font-weight: 600; font-size: 15.5px; line-height: 1.45; }
+
+  /* Trích dẫn + Bản tin */
+  .quote { background: var(--soft); border-radius: 22px; padding: 56px; text-align: center; }
+  .quote p { font-size: clamp(22px, 3vw, 30px); line-height: 1.5; max-width: 760px; margin: 0 auto; }
+  .quote small { display: block; margin-top: 16px; color: var(--muted); }
+  .news { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; background: var(--green);
+    color: #fff; border-radius: 22px; padding: 48px; }
+  .news h2 { font-size: 30px; line-height: 1.3; }
+  .news p { opacity: .85; margin-top: 8px; }
+  .news form { display: flex; gap: 10px; }
+  .news input { flex: 1; padding: 14px 16px; border-radius: 10px; border: 0; font: inherit; font-size: 15px; }
+  .news button { padding: 14px 22px; border-radius: 10px; border: 0; background: #1F2328; color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+
+  footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 40px 0; color: var(--muted); font-size: 14.5px; }
+  .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+  @media (max-width: 900px) {
+    .hero, .split, .news { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: 1fr 1fr; }
+    .menu { display: none; } .burger { display: grid; } .actions { margin-left: auto; }
+  }
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 120px 1fr; gap: 14px; } .row p { display: none; }
+    .quote, .news { padding: 32px 22px; } .news form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">Decor<span>NhàĐẹp</span></a>
+    <nav class="menu">
+      <a href="#">Phòng khách</a><a href="#">Phòng ngủ</a><a href="#">Bếp & Ăn</a>
+      <a href="#">Ban công</a><a href="#">Mẹo nhỏ</a><a href="#">Giới thiệu</a>
+    </nav>
+    <div class="actions">
+      <button class="icon-btn" aria-label="Tìm kiếm">⌕</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Đổi giao diện sáng tối" title="Đổi giao diện">☾</button>
+      <button class="icon-btn burger" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. Bài nổi bật -->
+  <div class="hero">
+    <div>
+      <span class="tag">Bài nổi bật</span>
+      <h1>10 cách biến phòng khách nhỏ thành góc sống ấm áp</h1>
+      <p>Không cần đập phá, chỉ cần đổi đèn, thêm vài món đồ đan mây và sắp lại bố cục là căn phòng đã khác hẳn.</p>
+      <div class="meta"><span>Lê Duyên</span>·<span>12/11/2026</span>·<span>6 phút đọc</span></div>
+      <a class="btn" href="#">Đọc bài viết →</a>
+    </div>
+    <a class="hero-img" href="#"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200" alt="Phòng khách ấm áp"></a>
+  </div>
+
+  <!-- 2. Danh mục -->
+  <div class="cats">
+    <button class="chip on">Tất cả</button><button class="chip">Phòng khách</button>
+    <button class="chip">Phòng ngủ</button><button class="chip">Đèn trang trí</button>
+    <button class="chip">Đồ đan mây</button><button class="chip">Cây xanh</button><button class="chip">Mẹo tiết kiệm</button>
+  </div>
+
+  <!-- 3. Bài mới -->
+  <section>
+    <div class="head"><h2>Bài viết mới</h2><a href="#">Xem tất cả →</a></div>
+    <div class="grid">
+      <a class="card" href="#"><div class="thumb"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt=""></div>
+        <div class="cat">Phòng ngủ</div><h3>Chọn đèn ngủ cho giấc ngủ sâu hơn</h3>
+        <p>Ánh sáng vàng ấm, độ cao hợp lý và chất liệu tự nhiên giúp phòng ngủ dịu mắt ngay tức thì.</p><small>5 phút đọc</small></a>
+      <a class="card" href="#"><div class="thumb"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800" alt=""></div>
+        <div class="cat">Bếp & Ăn</div><h3>Bếp nhỏ gọn gàng nhờ 7 món đồ đa năng</h3>
+        <p>Kệ treo, giỏ mây và hộp đựng đồng bộ là bộ ba giúp gian bếp luôn thoáng.</p><small>4 phút đọc</small></a>
+      <a class="card" href="#"><div class="thumb"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800" alt=""></div>
+        <div class="cat">Cây xanh</div><h3>Cây trong nhà dễ sống cho người bận rộn</h3>
+        <p>Những loại cây chịu bóng, ít tưới mà vẫn xanh tốt quanh năm.</p><small>7 phút đọc</small></a>
+    </div>
+  </section>
+
+  <!-- 4. Danh sách + Đọc nhiều -->
+  <section class="split">
+    <div>
+      <div class="head"><h2>Cảm hứng tuần này</h2></div>
+      <a class="card row" href="#"><div class="thumb"><img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=600" alt=""></div>
+        <div><div class="cat">Đèn trang trí</div><h3>Đèn mây tre đan: vì sao lại hợp nhà Việt?</h3>
+        <p>Chất liệu thân thuộc, tán sáng mềm và rất dễ phối với nhiều phong cách.</p></div></a>
+      <a class="card row" href="#"><div class="thumb"><img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=600" alt=""></div>
+        <div><div class="cat">Mẹo tiết kiệm</div><h3>Làm mới nhà dưới 2 triệu đồng</h3>
+        <p>Thay vỏ gối, rèm và đèn là ba khoản nhỏ nhưng tạo khác biệt lớn.</p></div></a>
+      <a class="card row" href="#"><div class="thumb"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600" alt=""></div>
+        <div><div class="cat">Ban công</div><h3>Ban công 3m² thành góc cà phê buổi sáng</h3>
+        <p>Một chiếc ghế mây, vài chậu cây và dây đèn là đủ.</p></div></a>
+    </div>
+    <aside>
+      <div class="box">
+        <h4>Đọc nhiều nhất</h4>
+        <a class="rank" href="#"><b>1</b><span>Phối màu sơn tường cho nhà hướng Tây</span></a>
+        <a class="rank" href="#"><b>2</b><span>5 lỗi treo tranh ai cũng mắc</span></a>
+        <a class="rank" href="#"><b>3</b><span>Đèn thả bàn ăn: cao bao nhiêu là chuẩn?</span></a>
+        <a class="rank" href="#"><b>4</b><span>Thảm trải sàn cho nhà có trẻ nhỏ</span></a>
+      </div>
+    </aside>
+  </section>
+
+  <!-- 5. Trích dẫn -->
+  <section><div class="quote">
+    <p class="serif">“Ngôi nhà đẹp không phải nơi nhiều đồ nhất, mà là nơi mỗi món đồ đều có lý do để ở lại.”</p>
+    <small>- Lê Duyên</small>
+  </div></section>
+
+  <!-- 6. Bản tin -->
+  <section><div class="news">
+    <div><h2>Mỗi tuần một ý tưởng làm đẹp nhà</h2><p>Gửi vào email sáng Chủ nhật. Không quảng cáo, huỷ bất cứ lúc nào.</p></div>
+    <form onsubmit="event.preventDefault()"><input type="email" placeholder="Email của bạn"><button>Đăng ký</button></form>
+  </div></section>
+</main>
+
+<footer><div class="wrap foot">
+  <span>© 2026 Decor Nhà Đẹp · Lê Duyên</span>
+  <span>Facebook · Pinterest · YouTube</span>
+</div></footer>
+
+<script>
+  var btn = document.getElementById('themeBtn');
+  function paint() { btn.textContent = document.documentElement.dataset.theme === 'dark' ? '☀' : '☾'; }
+  btn.onclick = function () {
+    var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('theme', next);
+    paint();
+  };
+  paint();
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.onclick = function () { document.querySelector('.chip.on').classList.remove('on'); c.classList.add('on'); };
+  });
+</script>
+</body>
+</html>
