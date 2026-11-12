@@ -12,74 +12,48 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <html lang="vi">
 	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
+		<BaseHead title={title} description={description} image={heroImage} />
 	</head>
-
 	<body>
+		<div class="progress" id="progress"></div>
 		<Header />
-		<main>
+		<main class="wrap">
 			<article>
-				<div class="hero-image">
-					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
+				<div class="title">
+					<p class="meta">
+						<FormattedDate date={pubDate} />
+						{updatedDate && <span> · Cập nhật <FormattedDate date={updatedDate} /></span>}
+					</p>
+					<h1>{title}</h1>
+					{description && <p class="lead">{description}</p>}
 				</div>
+				{heroImage && <div class="hero-image"><img width={1020} height={510} src={heroImage} alt="" /></div>}
 				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
 					<slot />
 				</div>
 			</article>
 		</main>
 		<Footer />
+		<script is:inline>
+			(function () {
+				var bar = document.getElementById('progress');
+				function update() {
+					var h = document.documentElement.scrollHeight - window.innerHeight;
+					bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+				}
+				window.addEventListener('scroll', update, { passive: true });
+				update();
+			})();
+		</script>
+		<style>
+			.progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--accent); z-index: 20; }
+			article { padding: 56px 0 24px; }
+			.title { max-width: 760px; margin: 0 auto 32px; text-align: center; }
+			.meta { color: var(--muted); font-size: 14.5px; }
+			h1 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.2; letter-spacing: -1px; margin: 12px 0; }
+			.lead { color: var(--muted); font-size: 19px; }
+			.hero-image { max-width: 1020px; margin: 0 auto 40px; }
+			.hero-image img { width: 100%; border-radius: 20px; display: block; }
+		</style>
 	</body>
 </html>
