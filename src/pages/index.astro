@@ -63,6 +63,9 @@ const faqs = [
 					<div><b>{groups.length}</b><span>Nhóm công việc</span></div>
 					<div><b>Ngay</b><span>Nhận sau thanh toán</span></div>
 				</div>
+				<div class="hero-img">
+					<img src="/images/duyen-hero.webp" width="1600" height="900" alt="Duyên Mê AI làm việc cùng laptop tại quán cà phê" fetchpriority="high" />
+				</div>
 			</div>
 
 			<section>
@@ -107,6 +110,23 @@ const faqs = [
 					</div>
 				</section>
 			)}
+
+			<section class="about">
+				<div class="about-pics">
+					<img class="pic-tall" src="/images/duyen-speaker.webp" width="800" height="1427" alt="Duyên chia sẻ trên sân khấu với vai trò diễn giả" loading="lazy" />
+					<img class="pic-wide" src="/images/duyen-studio.webp" width="1200" height="675" alt="Duyên cùng KOL AI duyệt ảnh trong studio" loading="lazy" />
+				</div>
+				<div>
+					<span class="pill">Về Duyên</span>
+					<h2>Mình dùng AI mỗi ngày để làm việc nhẹ hơn</h2>
+					<p class="sub">Từ làm ảnh, dựng video đến viết nội dung và tự động hoá bán hàng, mọi Skill ở đây đều là quy trình mình đã chạy thật trước khi chia sẻ.</p>
+					<div class="social">
+						<a href="https://www.facebook.com/DuyenMeAI" target="_blank" rel="noopener">Facebook</a>
+						<a href="https://www.tiktok.com/@duyenmeai" target="_blank" rel="noopener">TikTok</a>
+						<a href="https://www.youtube.com/@DuyenMeAI" target="_blank" rel="noopener">YouTube</a>
+					</div>
+				</div>
+			</section>
 
 			<section>
 				<h2>Cam kết khi mua Skill</h2>
@@ -153,6 +173,17 @@ const faqs = [
 			.stats { display: flex; justify-content: center; gap: 48px; margin-top: 40px; flex-wrap: wrap; }
 			.stats b { display: block; font-size: 28px; font-weight: 800; }
 			.stats span { color: var(--muted); font-size: 14px; }
+			.hero-img { margin-top: 48px; border-radius: 24px; overflow: hidden; aspect-ratio: 16 / 8; background: var(--soft); }
+			.hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; }
+			.about { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+			.about h2 { margin-top: 14px; }
+			.about-pics { display: grid; grid-template-columns: 0.8fr 1fr; gap: 16px; align-items: end; }
+			.about-pics img { width: 100%; border-radius: var(--r); display: block; object-fit: cover; }
+			.pic-tall { aspect-ratio: 3 / 4.6; object-position: center 40%; }
+			.pic-wide { aspect-ratio: 4 / 5; object-position: 30% center; }
+			.social { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+			.social a { padding: 10px 18px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); font-weight: 600; font-size: 14.5px; }
+			.social a:hover { border-color: var(--accent); color: var(--accent); }
 			.groups { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 32px; }
 			.g { border-radius: var(--r); padding: 26px; display: flex; flex-direction: column; gap: 6px; transition: transform 0.25s; }
 			.g:hover { transform: translateY(-4px); }
@@ -187,12 +218,13 @@ const faqs = [
 			details p { color: var(--muted); margin-top: 10px; }
 			.final { background: var(--ink); color: var(--bg); border-radius: 24px; padding: 56px; text-align: center; }
 			.final p { opacity: 0.75; margin: 10px auto 0; max-width: 520px; }
-			@media (max-width: 960px) { .groups, .skills { grid-template-columns: 1fr 1fr; } }
+			@media (max-width: 960px) { .groups, .skills { grid-template-columns: 1fr 1fr; } .about { grid-template-columns: 1fr; gap: 32px; } }
 			@media (max-width: 620px) {
 				.groups, .skills, .promise { grid-template-columns: 1fr; }
 				.final { padding: 36px 22px; }
 				.hero { padding-top: 48px; }
 				.stats { gap: 28px; }
+				.hero-img { aspect-ratio: 4 / 3; }
 			}
 		</style>
 	</body>
