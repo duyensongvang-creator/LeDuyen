@@ -4,53 +4,63 @@ import { SITE_TITLE } from '../consts';
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
+	<div class="wrap nav">
+		<a class="logo" href="/"><i>✦</i>{SITE_TITLE}</a>
+		<nav class="menu" id="menu">
 			<HeaderLink href="/">Trang chủ</HeaderLink>
+			<HeaderLink href="/#skill">Skill AI</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">Giới thiệu</HeaderLink>
+			<HeaderLink href="/about">Về Duyên</HeaderLink>
+		</nav>
+		<div class="actions">
+			<button class="ib" id="themeBtn" type="button" aria-label="Đổi giao diện sáng tối" title="Đổi giao diện">☾</button>
+			<button class="ib burger" id="burger" type="button" aria-label="Mở menu" aria-controls="menu">≡</button>
 		</div>
-	</nav>
+	</div>
 </header>
+
+<script is:inline>
+	(function () {
+		var root = document.documentElement;
+		var btn = document.getElementById('themeBtn');
+		function paint() { btn.textContent = root.dataset.theme === 'dark' ? '☀' : '☾'; }
+		btn.addEventListener('click', function () {
+			var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+			root.dataset.theme = next;
+			localStorage.setItem('theme', next);
+			paint();
+		});
+		paint();
+		document.getElementById('burger').addEventListener('click', function () {
+			document.getElementById('menu').classList.toggle('open');
+		});
+	})();
+</script>
+
 <style>
 	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		position: sticky; top: 0; z-index: 10;
+		background: color-mix(in srgb, var(--bg) 90%, transparent);
+		backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
 	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
+	.nav { display: flex; align-items: center; gap: 28px; height: 68px; position: relative; }
+	.logo { font-weight: 800; font-size: 19px; display: flex; gap: 8px; align-items: center; }
+	.logo i { font-style: normal; color: var(--accent); }
+	.menu { display: flex; gap: 22px; margin-left: auto; font-size: 15px; font-weight: 500; color: var(--muted); }
+	.actions { display: flex; gap: 8px; }
+	.ib {
+		width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line);
+		background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; font-size: 17px;
 	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
+	.ib:hover { border-color: var(--accent); }
+	.burger { display: none; }
+	@media (max-width: 760px) {
+		.actions { margin-left: auto; }
+		.burger { display: grid; }
+		.menu {
+			display: none; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; gap: 4px;
+			background: var(--bg); border-bottom: 1px solid var(--line); padding: 12px 24px 18px;
 		}
+		.menu.open { display: flex; }
 	}
 </style>

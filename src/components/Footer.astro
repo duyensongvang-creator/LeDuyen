@@ -1,28 +1,23 @@
 ---
+import { SITE_TITLE } from '../consts';
 const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Lê Duyên.
+	<div class="wrap foot">
+		<span>&copy; {today.getFullYear()} {SITE_TITLE} · Lê Duyên</span>
+		<nav>
+			<a href="/about">Liên hệ</a>
+			<a href="/rss.xml">RSS</a>
+			<a href="#">Facebook</a>
+			<a href="#">TikTok</a>
+			<a href="#">YouTube</a>
+		</nav>
+	</div>
 </footer>
 <style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
+	footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 36px 0; color: var(--muted); font-size: 14.5px; }
+	.foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+	nav { display: flex; gap: 18px; flex-wrap: wrap; }
+	a:hover { color: var(--text); }
 </style>
